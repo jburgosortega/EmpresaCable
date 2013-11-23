@@ -13,15 +13,14 @@ public class Datos {
     private String Nombre;
     private String Apellido;
     private int Rut;
-    private int Edad;
+    private int FechaNacimiento;
     private String Sexo;
     private String Correo;
     private int NroTelefono;
     private int NroCelular;
     private String Direccion;
     private int Numero;
-    private String Comuna;
-    private String Region;
+    private String Comuna;   
     private String CodigoVerificador;    
     private String Contraseña;    
     /**
@@ -30,24 +29,23 @@ public class Datos {
     public static String Comparar;
     public static int Comparar2;
 
-    public Datos(String Nombre, String Apellido, int Rut, int Edad, String Sexo,
+    public Datos(String Nombre, String Apellido, int Rut, int FechaNacimiento, String Sexo,
             String Correo, int NroTelefono, int NroCelular, String Direccion, int Numero,
-            String Comuna, String Region, String CodigoVerificador, 
+            String Comuna,String CodigoVerificador, 
             String Contraseña, String Comparar,int Comparar2) {
 
 
         this.Nombre = "";
         this.Apellido = "";
         this.Rut = 0;
-        this.Edad = 0;
+        this.FechaNacimiento = 0;
         this.Sexo = "";
         this.Correo = "";
         this.NroTelefono = 0;
         this.NroCelular = 0;
         this.Direccion = "";
         this.Numero = 0;
-        this.Comuna = "";
-        this.Region = "";
+        this.Comuna = "";        
         this.CodigoVerificador = "";        
         this.Contraseña = "";
         Datos.Comparar = "";
@@ -58,15 +56,14 @@ public class Datos {
         this.Nombre = Nombre;
         this.Apellido = Apellido;
         this.Rut = Rut;
-        this.Edad = Edad;
+        this.FechaNacimiento = FechaNacimiento;
         this.Sexo = Sexo;
         this.Correo = Correo;
         this.NroTelefono = NroTelefono;
         this.NroCelular = NroCelular;
         this.Direccion = Direccion;
         this.Numero = Numero;
-        this.Comuna = Comuna;
-        this.Region = Region;
+        this.Comuna = Comuna;       
         this.CodigoVerificador = CodigoVerificador;        
         this.Contraseña = Contraseña;
         Datos.Comparar = Comparar;
@@ -102,17 +99,17 @@ public class Datos {
     }
   
     /**
-     * @return the Edad
+     * @return the FechaNacimiento
      */
-    public int getEdad() {
-        return Edad;
+    public int getFechaNacimiento() {
+        return FechaNacimiento;
     }
 
     /**
-     * @param Edad the Edad to set
+     * @param Edad the FechaNacimiento to set
      */
-    public void setEdad(int Edad) {
-        this.Edad = Edad;
+    public void setFechaNacimiento(int FechaNacimiento) {
+        this.FechaNacimiento = FechaNacimiento;
     }
 
     /**
@@ -212,21 +209,6 @@ public class Datos {
     public void setComuna(String Comuna) {
         this.Comuna = Comuna;
     }
-
-    /**
-     * @return the Region
-     */
-    public String getRegion() {
-        return Region;
-    }
-
-    /**
-     * @param Region the Region to set
-     */
-    public void setRegion(String Region) {
-        this.Region = Region;
-    }
-
     /**
      * @return the CodigoVerificador
      */

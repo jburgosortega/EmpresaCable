@@ -6,8 +6,6 @@ package capaNegocio;
 
 import capaConexion.Conexion;
 import capaDatos.Datos;
-import capaDatos.DatosCanales;
-import capaDatos.DatosDecodificadores;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -46,15 +44,14 @@ public class Negocio {
                 + asd.getRut() + ",'"
                 + asd.getNombre() + "','"
                 + asd.getApellido() + "',"
-                + asd.getEdad() + ",'"
+                + asd.getFechaNacimiento() + ",'"
                 + asd.getSexo() + "','"
                 + asd.getCorreo() + "',"
                 + asd.getNroTelefono() + ","
                 + asd.getNroCelular() + ",'"
                 + asd.getDireccion() + "',"
                 + asd.getNumero() + ",'"
-                + asd.getComuna() + "','"
-                + asd.getRegion() + "','"
+                + asd.getComuna() + "','"               
                 + asd.getContraseña() + "','"
                 + asd.getCodigoVerificador() + "')");
 
@@ -77,15 +74,14 @@ public class Negocio {
                 asd.setRut(cnn.getRst().getInt("Rut"));
                 asd.setNombre(cnn.getRst().getString("Nombre"));
                 asd.setApellido(cnn.getRst().getString("Apellido"));
-                asd.setEdad(cnn.getRst().getInt("Edad"));
+                asd.setFechaNacimiento(cnn.getRst().getInt("FechaNacimiento"));
                 asd.setSexo(cnn.getRst().getString("Sexo"));
                 asd.setCorreo(cnn.getRst().getString("Correo"));
                 asd.setNroTelefono(cnn.getRst().getInt("NroTelefono"));
                 asd.setNroCelular(cnn.getRst().getInt("NroCelular"));
                 asd.setDireccion(cnn.getRst().getString("Direccion"));
                 asd.setNumero(cnn.getRst().getInt("Numero"));
-                asd.setComuna(cnn.getRst().getString("Comuna"));
-                asd.setRegion(cnn.getRst().getString("Region"));
+                asd.setComuna(cnn.getRst().getString("Comuna"));                
                 asd.setContraseña(cnn.getRst().getString("Contrasena"));
                 asd.setCodigoVerificador(cnn.getRst().getString("codigoVerificador"));
             }
@@ -109,15 +105,14 @@ public class Negocio {
                 asd.setRut(cnn.getRst().getInt("Rut"));
                 asd.setNombre(cnn.getRst().getString("Nombre"));
                 asd.setApellido(cnn.getRst().getString("Apellido"));
-                asd.setEdad(cnn.getRst().getInt("Edad"));
+                asd.setFechaNacimiento(cnn.getRst().getInt("FechaNacimiento"));
                 asd.setSexo(cnn.getRst().getString("Sexo"));
                 asd.setCorreo(cnn.getRst().getString("Correo"));
                 asd.setNroTelefono(cnn.getRst().getInt("NroTelefono"));
                 asd.setNroCelular(cnn.getRst().getInt("NroCelular"));
                 asd.setDireccion(cnn.getRst().getString("Direccion"));
                 asd.setNumero(cnn.getRst().getInt("Numero"));
-                asd.setComuna(cnn.getRst().getString("Comuna"));
-                asd.setRegion(cnn.getRst().getString("Region"));
+                asd.setComuna(cnn.getRst().getString("Comuna"));              
                 asd.setContraseña(cnn.getRst().getString("Contrasena"));
                 asd.setCodigoVerificador(cnn.getRst().getString("codigoVerificador"));
                 lista.add(asd);
@@ -128,48 +123,5 @@ public class Negocio {
         cnn.cerrarConexion();
         return lista;
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////Canales/////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////
-
-    public void ingresarDatosCanales(DatosCanales cl) {
-        this.configurarConexion();
-        cnn.setEsSelect(false);
-        cnn.setSentenciaSQL("insert into canales values("
-                + cl.getRut() + ","
-                + cl.getPackBasico() + ","
-                + cl.getPackHboPlus() + ","
-                + cl.getPackMovieCity() + ","
-                + cl.getPackDeporte() + ","
-                + cl.getPackHboHD() + ","
-                + cl.getPackMovieCityHD() + ","
-                + cl.getPackDeporteHD() + ","
-                + cl.getPackAdulto() + ")");
-
-
-        cnn.conectar();
-        cnn.cerrarConexion();
-    }
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////Decodificadores/////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    
-    public void ingresarDatosDecodificadores(DatosDecodificadores ab) {
-        this.configurarConexion();
-        cnn.setEsSelect(false);
-        cnn.setSentenciaSQL("insert into decodificadores values("
-                + ab.getRut() + ","
-                + ab.getDecodificadorSD() + ","
-                + ab.getDecodificadorHD() + ","
-                + ab.getDecodificadorFullHD() + ")");
-
-
-        cnn.conectar();
-        cnn.cerrarConexion();
-    }
+   
 }
