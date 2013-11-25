@@ -7,6 +7,8 @@ package capaGui;
 import capaDatos.Datos;
 import capaNegocio.Negocio;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -25,6 +27,14 @@ public class MenuRegistrar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
 
+
+        Negocio neg = new Negocio();
+        ArrayList<Datos> lista = neg.getDatos();
+        for (int i = 0; i < lista.size(); i++) {
+            Datos asd = lista.get(i);
+            this.cmbComuna.addItem(asd.getComuna());
+            System.out.print(asd.getComuna());
+        }
     }
 
     /**
@@ -43,7 +53,6 @@ public class MenuRegistrar extends javax.swing.JDialog {
         lblRut = new javax.swing.JLabel();
         txtRut = new javax.swing.JTextField();
         lblFechaNacimiento = new javax.swing.JLabel();
-        txtFechaNacimiento = new javax.swing.JTextField();
         lblSexo = new javax.swing.JLabel();
         cmbSexo = new javax.swing.JComboBox();
         lblNombre = new javax.swing.JLabel();
@@ -64,6 +73,7 @@ public class MenuRegistrar extends javax.swing.JDialog {
         lblGuion = new javax.swing.JLabel();
         txtDigito = new javax.swing.JTextField();
         cmbComuna = new javax.swing.JComboBox();
+        txtFechaCalendario = new com.toedter.calendar.JDateChooser();
         jPanel6 = new javax.swing.JPanel();
         lblContraseña = new javax.swing.JLabel();
         pswContraseña = new javax.swing.JPasswordField();
@@ -118,14 +128,6 @@ public class MenuRegistrar extends javax.swing.JDialog {
 
         lblFechaNacimiento.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         lblFechaNacimiento.setText("Fecha Nacimiento");
-
-        txtFechaNacimiento.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtFechaNacimiento.setText("     -       - ");
-        txtFechaNacimiento.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtFechaNacimientoKeyTyped(evt);
-            }
-        });
 
         lblSexo.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         lblSexo.setText("Sexo");
@@ -217,6 +219,14 @@ public class MenuRegistrar extends javax.swing.JDialog {
         });
 
         cmbComuna.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cmbComuna.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione..." }));
+
+        txtFechaCalendario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtFechaCalendario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFechaCalendarioKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -225,14 +235,6 @@ public class MenuRegistrar extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblNroTelefono)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNroTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblNroCelular)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNroCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addComponent(lblDireccion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -247,7 +249,7 @@ public class MenuRegistrar extends javax.swing.JDialog {
                         .addComponent(cmbComuna, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(lblNombre)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -266,16 +268,31 @@ public class MenuRegistrar extends javax.swing.JDialog {
                                 .addComponent(txtDigito, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(lblFechaNacimiento)
-                                .addGap(103, 103, 103)
-                                .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtFechaCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblNroTelefono)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(110, 110, 110)
                                 .addComponent(lblSexo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCorreo)
+                                .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNroTelefono))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCorreo)))))
+                                .addComponent(lblCorreo))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(lblNroCelular)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(txtNroCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtCorreo))))
                 .addGap(214, 214, 214))
         );
         jPanel3Layout.setVerticalGroup(
@@ -294,13 +311,14 @@ public class MenuRegistrar extends javax.swing.JDialog {
                         .addComponent(lblGuion)
                         .addComponent(txtDigito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFechaNacimiento)
-                    .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSexo)
-                    .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCorreo)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblFechaNacimiento)
+                        .addComponent(lblSexo)
+                        .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCorreo)
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFechaCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNroTelefono)
@@ -487,95 +505,6 @@ public class MenuRegistrar extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutKeyTyped
-        if (evt.getKeyChar() < '0' || evt.getKeyChar() > '9') {
-            evt.consume();
-        } else {
-            if (txtRut.getText().trim().length() > 7) {
-                evt.consume();
-            }
-        }
-    }//GEN-LAST:event_txtRutKeyTyped
-
-    private void txtFechaNacimientoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaNacimientoKeyTyped
-        if (evt.getKeyChar() < '0' || evt.getKeyChar() > '9') {
-            evt.consume();
-        } else {
-            if (txtFechaNacimiento.getText().trim().length() > 9) {
-                evt.consume();
-            }
-        }
-    }//GEN-LAST:event_txtFechaNacimientoKeyTyped
-
-    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        if ((evt.getKeyChar() < 'a' || evt.getKeyChar() > 'z')
-                && (evt.getKeyChar() < 'A' || evt.getKeyChar() > 'Z')
-                && (evt.getKeyChar() != KeyEvent.VK_SPACE)) {
-            evt.consume();
-        } else {
-            if (txtNombre.getText().trim().length() > 19) {
-                evt.consume();
-            }
-        }
-    }//GEN-LAST:event_txtNombreKeyTyped
-
-    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
-        if ((evt.getKeyChar() < 'a' || evt.getKeyChar() > 'z')
-                && (evt.getKeyChar() < 'A' || evt.getKeyChar() > 'Z')
-                && (evt.getKeyChar() != KeyEvent.VK_SPACE)) {
-            evt.consume();
-        } else {
-            if (txtApellido.getText().trim().length() > 19) {
-                evt.consume();
-            }
-        }
-    }//GEN-LAST:event_txtApellidoKeyTyped
-
-    private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
-        if (this.txtCorreo.getText().trim().length() > 35) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtCorreoKeyTyped
-
-    private void txtNroTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNroTelefonoKeyTyped
-        if (evt.getKeyChar() < '0' || evt.getKeyChar() > '9') {
-            evt.consume();
-        } else {
-            if (txtNroTelefono.getText().trim().length() > 8) {
-                evt.consume();
-            }
-        }
-    }//GEN-LAST:event_txtNroTelefonoKeyTyped
-
-    private void txtNroCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNroCelularKeyTyped
-
-        if (evt.getKeyChar() < '0' || evt.getKeyChar() > '9') {
-            evt.consume();
-        } else {
-            if (txtNroCelular.getText().trim().length() > 8) {
-                evt.consume();
-            }
-        }
-
-
-    }//GEN-LAST:event_txtNroCelularKeyTyped
-
-    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
-        if (this.txtDireccion.getText().trim().length() > 30) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtDireccionKeyTyped
-
-    private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
-        if (evt.getKeyChar() < '0' || evt.getKeyChar() > '9') {
-            evt.consume();
-        } else {
-            if (txtNumero.getText().trim().length() > 4) {
-                evt.consume();
-            }
-        }
-    }//GEN-LAST:event_txtNumeroKeyTyped
-
     private void pswContraseñaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswContraseñaKeyTyped
         if (this.pswContraseña.getText().trim().length() > 20) {
             evt.consume();
@@ -592,10 +521,9 @@ public class MenuRegistrar extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_pswContraseña2KeyTyped
-    private int Comparar;        
+    private int Comparar;
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-    
-    
+
         if (this.txtNombre.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe ingresar el Nombre",
                     "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
@@ -608,6 +536,7 @@ public class MenuRegistrar extends javax.swing.JDialog {
             this.txtApellido.requestFocus();
             return;
         }
+        ValidadRut();
         if (this.txtRut.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,
                     "Debe ingresar el Rut",
@@ -615,11 +544,11 @@ public class MenuRegistrar extends javax.swing.JDialog {
             this.txtRut.requestFocus();
             return;
         }
-        if (this.txtFechaNacimiento.getText().trim().isEmpty()) {
+        if (this.txtFechaCalendario.getDate() == null) {
             JOptionPane.showMessageDialog(this,
-                    "Debe ingresar la Edad",
+                    "Debe ingresar la Fecha de Nacimiento",
                     "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
-            this.txtFechaNacimiento.requestFocus();
+            this.txtFechaCalendario.requestFocus();
             return;
         }
         if (this.cmbSexo.getSelectedIndex() == 0) {
@@ -670,7 +599,7 @@ public class MenuRegistrar extends javax.swing.JDialog {
                     "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
             this.cmbComuna.requestFocus();
             return;
-        }        
+        }
         if (this.pswContraseña.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,
                     "Debe ingresar la Contraseña",
@@ -685,7 +614,7 @@ public class MenuRegistrar extends javax.swing.JDialog {
             this.pswContraseña2.requestFocus();
             return;
         }
-    
+
         if (this.cbCondiciones.isSelected()) {
         } else {
             JOptionPane.showMessageDialog(this,
@@ -714,23 +643,25 @@ public class MenuRegistrar extends javax.swing.JDialog {
             this.pswContraseña2.setText("");
             this.pswContraseña.requestFocus();
             return;
-        }        
+        }
         Datos asd = new Datos();
         asd.setRut(Integer.parseInt(this.txtRut.getText().trim()));
         asd.setNombre(this.txtNombre.getText().trim());
         asd.setApellido(this.txtApellido.getText().trim());
-        asd.setFechaNacimiento(Integer.parseInt(this.txtFechaNacimiento.getText().trim()));
+        asd.setFechaNacimiento(((txtFechaCalendario.getCalendar().get(Calendar.YEAR)) + "-"
+                + (txtFechaCalendario.getCalendar().get(Calendar.MONTH) + 1) + "-"
+                + (txtFechaCalendario.getCalendar().get(Calendar.DAY_OF_MONTH))));
         asd.setSexo((String) this.cmbSexo.getSelectedItem());
         asd.setCorreo(this.txtCorreo.getText().trim());
         asd.setNroTelefono(Integer.parseInt(this.txtNroTelefono.getText().trim()));
         asd.setNroCelular(Integer.parseInt(this.txtNroCelular.getText().trim()));
         asd.setDireccion(this.txtDireccion.getText().trim());
         asd.setNumero(Integer.parseInt(this.txtNumero.getText().trim()));
-        asd.setComuna((String)this.cmbComuna.getSelectedItem());       
-        asd.setContraseña(this.pswContraseña.getText().trim());             
+        asd.setComuna((String) this.cmbComuna.getSelectedItem());
+        asd.setContraseña(this.pswContraseña.getText().trim());
 
         neg.ingresarDatos(asd);
-      
+
         JOptionPane.showMessageDialog(this, "Ingreso Exito",
                 "Bienvenido!", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
@@ -750,8 +681,98 @@ public class MenuRegistrar extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtDigitoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDigitoKeyTyped
-        // TODO add your handling code here:
+        if ((evt.getKeyChar() < '0' || evt.getKeyChar() > '9')) {
+            evt.consume();
+        } else {
+            if (txtDigito.getText().trim().length() > 0) {
+                evt.consume();
+            }
+        }
     }//GEN-LAST:event_txtDigitoKeyTyped
+
+    private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
+        if (evt.getKeyChar() < '0' || evt.getKeyChar() > '9') {
+            evt.consume();
+        } else {
+            if (txtNumero.getText().trim().length() > 4) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtNumeroKeyTyped
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        if (this.txtDireccion.getText().trim().length() > 30) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDireccionKeyTyped
+
+    private void txtNroCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNroCelularKeyTyped
+
+        if (evt.getKeyChar() < '0' || evt.getKeyChar() > '9') {
+            evt.consume();
+        } else {
+            if (txtNroCelular.getText().trim().length() > 8) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtNroCelularKeyTyped
+
+    private void txtNroTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNroTelefonoKeyTyped
+        if (evt.getKeyChar() < '0' || evt.getKeyChar() > '9') {
+            evt.consume();
+        } else {
+            if (txtNroTelefono.getText().trim().length() > 8) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtNroTelefonoKeyTyped
+
+    private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
+        if (this.txtCorreo.getText().trim().length() > 35) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCorreoKeyTyped
+
+    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
+        if ((evt.getKeyChar() < 'a' || evt.getKeyChar() > 'z')
+                && (evt.getKeyChar() < 'A' || evt.getKeyChar() > 'Z')
+                && (evt.getKeyChar() != KeyEvent.VK_SPACE)) {
+            evt.consume();
+        } else {
+            if (txtApellido.getText().trim().length() > 19) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtApellidoKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        if ((evt.getKeyChar() < 'a' || evt.getKeyChar() > 'z')
+                && (evt.getKeyChar() < 'A' || evt.getKeyChar() > 'Z')
+                && (evt.getKeyChar() != KeyEvent.VK_SPACE)) {
+            evt.consume();
+        } else {
+            if (txtNombre.getText().trim().length() > 19) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutKeyTyped
+        if (evt.getKeyChar() < '0' || evt.getKeyChar() > '9') {
+            evt.consume();
+        } else {
+            if (txtRut.getText().trim().length() > 7) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtRutKeyTyped
+
+    private void txtFechaCalendarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaCalendarioKeyTyped
+        if ((evt.getKeyChar() < '0' || evt.getKeyChar() > '9')
+                && (evt.getKeyChar() != '-')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFechaCalendarioKeyTyped
 
     /**
      * @param args the command line arguments
@@ -827,11 +848,43 @@ public class MenuRegistrar extends javax.swing.JDialog {
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDigito;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtFechaNacimiento;
+    private com.toedter.calendar.JDateChooser txtFechaCalendario;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNroCelular;
     private javax.swing.JTextField txtNroTelefono;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtRut;
     // End of variables declaration//GEN-END:variables
+
+    private void ValidadRut() {
+        int suma = 0;
+        int pond = 2;
+        int largo = this.txtRut.getText().trim().length();
+        int resto = 0;
+        int digito = 0;
+        String digVer = "";
+        for (int i = largo - 1; i > -1; i--) {
+            //System.out.println(this.txtRut.getText().charAt(i));
+            suma = suma + (Integer.parseInt("" + this.txtRut.getText().charAt(i)) * pond);
+            pond++;
+            if (pond > 7) {
+                pond = 2;
+            }
+        }
+        //System.out.println("suma: " + suma);
+        resto = suma % 11;
+        digito = 11 - resto;
+        if (digito == 10) {
+            digVer = "k";
+        } else if (digito == 11) {
+            digVer = "0";
+        } else {
+            digVer = "" + digito;
+        }
+        if (!this.txtDigito.getText().equals(digVer)) {
+            JOptionPane.showMessageDialog(this, "Rut incorrecto", "Error de ingreso", JOptionPane.WARNING_MESSAGE);
+            this.txtDigito.requestFocus();
+
+        }
+    }
 }

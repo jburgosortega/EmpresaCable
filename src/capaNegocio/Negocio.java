@@ -30,7 +30,7 @@ public class Negocio {
         cnn.setUrl("jdbc:mysql://localhost:3306/"
                 + cnn.getNombreBaseDatos());
 
-        cnn.setNombreTabla("RegistroDatos");
+        cnn.setNombreTabla("Cliente");
         cnn.setUser("root");
         cnn.setPassword("");
     }
@@ -43,17 +43,16 @@ public class Negocio {
                 + " values("
                 + asd.getRut() + ",'"
                 + asd.getNombre() + "','"
-                + asd.getApellido() + "',"
-                + asd.getFechaNacimiento() + ",'"
+                + asd.getApellido() + "','"
+                + asd.getFechaNacimiento() + "','"
                 + asd.getSexo() + "','"
                 + asd.getCorreo() + "',"
                 + asd.getNroTelefono() + ","
                 + asd.getNroCelular() + ",'"
                 + asd.getDireccion() + "',"
                 + asd.getNumero() + ",'"
-                + asd.getComuna() + "','"               
-                + asd.getContraseña() + "','"
-                + asd.getCodigoVerificador() + "')");
+                + asd.getContraseña() + "','"               
+                + asd.getComuna() + "')");
 
 
         cnn.conectar();
@@ -74,16 +73,16 @@ public class Negocio {
                 asd.setRut(cnn.getRst().getInt("Rut"));
                 asd.setNombre(cnn.getRst().getString("Nombre"));
                 asd.setApellido(cnn.getRst().getString("Apellido"));
-                asd.setFechaNacimiento(cnn.getRst().getInt("FechaNacimiento"));
+                asd.setFechaNacimiento(cnn.getRst().getString("FechaNacimiento"));
                 asd.setSexo(cnn.getRst().getString("Sexo"));
                 asd.setCorreo(cnn.getRst().getString("Correo"));
                 asd.setNroTelefono(cnn.getRst().getInt("NroTelefono"));
                 asd.setNroCelular(cnn.getRst().getInt("NroCelular"));
                 asd.setDireccion(cnn.getRst().getString("Direccion"));
-                asd.setNumero(cnn.getRst().getInt("Numero"));
-                asd.setComuna(cnn.getRst().getString("Comuna"));                
+                asd.setNumero(cnn.getRst().getInt("Numero"));                               
                 asd.setContraseña(cnn.getRst().getString("Contrasena"));
-                asd.setCodigoVerificador(cnn.getRst().getString("codigoVerificador"));
+                asd.setComuna(cnn.getRst().getString("Comuna_idComuna")); 
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(capaNegocio.Negocio.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,16 +104,15 @@ public class Negocio {
                 asd.setRut(cnn.getRst().getInt("Rut"));
                 asd.setNombre(cnn.getRst().getString("Nombre"));
                 asd.setApellido(cnn.getRst().getString("Apellido"));
-                asd.setFechaNacimiento(cnn.getRst().getInt("FechaNacimiento"));
+                asd.setFechaNacimiento(cnn.getRst().getString("FechaNacimiento"));
                 asd.setSexo(cnn.getRst().getString("Sexo"));
                 asd.setCorreo(cnn.getRst().getString("Correo"));
                 asd.setNroTelefono(cnn.getRst().getInt("NroTelefono"));
                 asd.setNroCelular(cnn.getRst().getInt("NroCelular"));
                 asd.setDireccion(cnn.getRst().getString("Direccion"));
-                asd.setNumero(cnn.getRst().getInt("Numero"));
-                asd.setComuna(cnn.getRst().getString("Comuna"));              
-                asd.setContraseña(cnn.getRst().getString("Contrasena"));
-                asd.setCodigoVerificador(cnn.getRst().getString("codigoVerificador"));
+                asd.setNumero(cnn.getRst().getInt("Numero"));                              
+                asd.setContraseña(cnn.getRst().getString("Contrasena"));                
+                asd.setComuna(cnn.getRst().getString("comuna_idComuna"));              
                 lista.add(asd);
             }
         } catch (SQLException ex) {

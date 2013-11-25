@@ -13,7 +13,7 @@ public class Datos {
     private String Nombre;
     private String Apellido;
     private int Rut;
-    private int FechaNacimiento;
+    private String FechaNacimiento;
     private String Sexo;
     private String Correo;
     private int NroTelefono;
@@ -29,7 +29,7 @@ public class Datos {
     public static String Comparar;
     public static int Comparar2;
 
-    public Datos(String Nombre, String Apellido, int Rut, int FechaNacimiento, String Sexo,
+    public Datos(String Nombre, String Apellido, int Rut, String FechaNacimiento, String Sexo,
             String Correo, int NroTelefono, int NroCelular, String Direccion, int Numero,
             String Comuna,String CodigoVerificador, 
             String Contraseña, String Comparar,int Comparar2) {
@@ -38,7 +38,7 @@ public class Datos {
         this.Nombre = "";
         this.Apellido = "";
         this.Rut = 0;
-        this.FechaNacimiento = 0;
+        this.FechaNacimiento = "";
         this.Sexo = "";
         this.Correo = "";
         this.NroTelefono = 0;
@@ -101,14 +101,14 @@ public class Datos {
     /**
      * @return the FechaNacimiento
      */
-    public int getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return FechaNacimiento;
     }
 
     /**
-     * @param Edad the FechaNacimiento to set
+     * @param  the FechaNacimiento to set
      */
-    public void setFechaNacimiento(int FechaNacimiento) {
+    public void setFechaNacimiento(String FechaNacimiento) {
         this.FechaNacimiento = FechaNacimiento;
     }
 
