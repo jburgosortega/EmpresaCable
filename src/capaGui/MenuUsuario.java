@@ -59,6 +59,7 @@ public class MenuUsuario extends javax.swing.JDialog {
         jPanel2.setForeground(new java.awt.Color(0, 0, 255));
 
         txtNombreUser.setEditable(false);
+        txtNombreUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtNombreUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreUserActionPerformed(evt);

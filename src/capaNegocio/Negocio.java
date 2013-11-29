@@ -51,8 +51,8 @@ public class Negocio {
                 + asd.getNroCelular() + ",'"
                 + asd.getDireccion() + "',"
                 + asd.getNumero() + ",'"
-                + asd.getContraseña() + "','"               
-                + asd.getComuna() + "')");
+                + asd.getContraseña() + "','"
+                + asd.getComuna()     + "')");
 
 
         cnn.conectar();
@@ -65,7 +65,7 @@ public class Negocio {
 
         cnn.setEsSelect(true);
         cnn.setSentenciaSQL("select * from "
-                + "RegistroDatos"
+                + "cliente"
                 + " where Rut=" + Rut);
         cnn.conectar();
         try {
@@ -79,10 +79,9 @@ public class Negocio {
                 asd.setNroTelefono(cnn.getRst().getInt("NroTelefono"));
                 asd.setNroCelular(cnn.getRst().getInt("NroCelular"));
                 asd.setDireccion(cnn.getRst().getString("Direccion"));
-                asd.setNumero(cnn.getRst().getInt("Numero"));                               
+                asd.setNumero(cnn.getRst().getInt("Numero"));
                 asd.setContraseña(cnn.getRst().getString("Contrasena"));
-                asd.setComuna(cnn.getRst().getString("Comuna_idComuna")); 
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(capaNegocio.Negocio.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,9 +109,9 @@ public class Negocio {
                 asd.setNroTelefono(cnn.getRst().getInt("NroTelefono"));
                 asd.setNroCelular(cnn.getRst().getInt("NroCelular"));
                 asd.setDireccion(cnn.getRst().getString("Direccion"));
-                asd.setNumero(cnn.getRst().getInt("Numero"));                              
-                asd.setContraseña(cnn.getRst().getString("Contrasena"));                
-                asd.setComuna(cnn.getRst().getString("comuna_idComuna"));              
+                asd.setNumero(cnn.getRst().getInt("Numero"));
+                asd.setContraseña(cnn.getRst().getString("Contrasena"));
+
                 lista.add(asd);
             }
         } catch (SQLException ex) {
@@ -120,6 +119,35 @@ public class Negocio {
         }
         cnn.cerrarConexion();
         return lista;
+
     }
-   
+    
+    //////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////Mostrar Comunas////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////
+    
+    public ArrayList<Datos> getDatos2() {
+        this.configurarConexion();
+        ArrayList<Datos> lista2 = new ArrayList();
+        cnn.setEsSelect(true);
+        cnn.setSentenciaSQL("select * from Comuna");
+        cnn.conectar();
+        try {
+            while (cnn.getRst().next()) {
+                Datos asd = new Datos();                
+                asd.setComuna((cnn.getRst().getInt("idComuna")+" .- "+
+                             (cnn.getRst().getString("Nombre"))));
+                
+                lista2.add(asd);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(capaNegocio.Negocio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cnn.cerrarConexion();
+        return lista2;
+
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////
 }

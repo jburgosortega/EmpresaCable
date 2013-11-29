@@ -20,9 +20,8 @@ public class Datos {
     private int NroCelular;
     private String Direccion;
     private int Numero;
-    private String Comuna;   
-    private String CodigoVerificador;    
-    private String Contraseña;    
+    private String Contraseña;
+    private String Comuna;
     /**
      *
      */
@@ -31,8 +30,7 @@ public class Datos {
 
     public Datos(String Nombre, String Apellido, int Rut, String FechaNacimiento, String Sexo,
             String Correo, int NroTelefono, int NroCelular, String Direccion, int Numero,
-            String Comuna,String CodigoVerificador, 
-            String Contraseña, String Comparar,int Comparar2) {
+            String Comuna, String Contraseña, String Comparar, int Comparar2) {
 
 
         this.Nombre = "";
@@ -45,8 +43,7 @@ public class Datos {
         this.NroCelular = 0;
         this.Direccion = "";
         this.Numero = 0;
-        this.Comuna = "";        
-        this.CodigoVerificador = "";        
+        this.Comuna = "";
         this.Contraseña = "";
         Datos.Comparar = "";
         Datos.Comparar2 = 0;
@@ -63,8 +60,7 @@ public class Datos {
         this.NroCelular = NroCelular;
         this.Direccion = Direccion;
         this.Numero = Numero;
-        this.Comuna = Comuna;       
-        this.CodigoVerificador = CodigoVerificador;        
+        this.Comuna = Comuna;
         this.Contraseña = Contraseña;
         Datos.Comparar = Comparar;
         Datos.Comparar2 = Comparar2;
@@ -97,7 +93,7 @@ public class Datos {
     public void setApellido(String Apellido) {
         this.Apellido = Apellido;
     }
-  
+
     /**
      * @return the FechaNacimiento
      */
@@ -106,7 +102,7 @@ public class Datos {
     }
 
     /**
-     * @param  the FechaNacimiento to set
+     * @param the FechaNacimiento to set
      */
     public void setFechaNacimiento(String FechaNacimiento) {
         this.FechaNacimiento = FechaNacimiento;
@@ -209,19 +205,6 @@ public class Datos {
     public void setComuna(String Comuna) {
         this.Comuna = Comuna;
     }
-    /**
-     * @return the CodigoVerificador
-     */
-    public String getCodigoVerificador() {
-        return CodigoVerificador;
-    }
-
-    /**
-     * @param CodigoVerificador the CodigoVerificador to set
-     */
-    public void setCodigoVerificador(String CodigoVerificador) {
-        this.CodigoVerificador = CodigoVerificador;
-    }
 
     /**
      * @return the Contraseña
@@ -264,8 +247,8 @@ public class Datos {
     public void setComparar(String Comparar) {
         Datos.Comparar = Comparar;
     }
-    
-     /**
+
+    /**
      * @return the Comparar2
      */
     public int getComparar2() {
@@ -278,7 +261,4 @@ public class Datos {
     public void setComparar2(int Comparar2) {
         Datos.Comparar2 = Comparar2;
     }
-
-    
-    
 }
