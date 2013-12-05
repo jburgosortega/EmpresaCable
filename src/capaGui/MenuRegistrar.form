@@ -179,8 +179,8 @@
                                   <Group type="102" attributes="0">
                                       <Component id="lblFechaNacimiento" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                                      <Component id="txtFechaCalendario" min="-2" pref="82" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
+                                      <Component id="txtFechaCalendario" min="-2" pref="106" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="193" max="-2" attributes="0"/>
                                       <Component id="lblCorreo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="txtCorreo" min="-2" pref="259" max="-2" attributes="0"/>

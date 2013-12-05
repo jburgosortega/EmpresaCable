@@ -4,8 +4,9 @@
  */
 package capaGui;
 
-import capaDatos.Datos;
-import capaNegocio.Negocio;
+import capaDatos.DatosCliente;
+import capaDatos.DatosProductos;
+import capaNegocio.NegocioCliente;
 
 /**
  *
@@ -291,12 +292,14 @@ public class MenuUsuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPackCanalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPackCanalesActionPerformed
-        MenuCanales dialog = new MenuCanales(new javax.swing.JFrame(), true);
-        dialog.setVisible(true);
+        MenuPackCanales dialog = new MenuPackCanales(new javax.swing.JFrame(), true);
+        DatosProductos.setComparar("packCanales");         
+        dialog.setVisible(true);        
     }//GEN-LAST:event_btnPackCanalesActionPerformed
 
     private void btnDecodificadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecodificadoresActionPerformed
         MenuDecodificadores dialog = new MenuDecodificadores(new javax.swing.JFrame(), true);
+        DatosProductos.setComparar("packdecodificadores"); 
         dialog.setVisible(true);
     }//GEN-LAST:event_btnDecodificadoresActionPerformed
 
@@ -311,8 +314,8 @@ public class MenuUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDeudaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Datos.Comparar = null;
-        Datos.Comparar2 = 0;
+        DatosCliente.Comparar = null;
+        DatosCliente.Comparar2 = 0;
 
         this.dispose();
         
@@ -385,7 +388,7 @@ public class MenuUsuario extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void nombre() {
-        txtNombreUser.setText("" + Datos.Comparar);
+        txtNombreUser.setText("" + DatosCliente.Comparar);
     }
 ;
 }

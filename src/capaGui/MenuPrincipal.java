@@ -4,7 +4,7 @@
  */
 package capaGui;
 
-import capaDatos.Datos;
+import capaDatos.DatosCliente;
 
 /**
  *

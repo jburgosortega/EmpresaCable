@@ -26,9 +26,10 @@ public class Conexion {
     private String user;
     private String password;
     private boolean esSelect;
-    private Connection cnn;
+    private Connection cnn;    
     private Statement stm;
     private ResultSet rst;
+    
 
     public Conexion(String nombreBaseDatos, String nombreTabla,
             String sentenciaSQL, String driver, String url,

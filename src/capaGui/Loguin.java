@@ -4,8 +4,8 @@
  */
 package capaGui;
 
-import capaDatos.Datos;
-import capaNegocio.Negocio;
+import capaDatos.DatosCliente;
+import capaNegocio.NegocioCliente;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -227,9 +227,9 @@ public class Loguin extends javax.swing.JDialog {
         }
         
 
-        Negocio neg = new Negocio();
+        NegocioCliente neg = new NegocioCliente();
 
-        Datos asd = neg.buscarDatos(Integer.parseInt(this.txtRut.getText().trim()));
+        DatosCliente asd = neg.buscarDatos(Integer.parseInt(this.txtRut.getText().trim()));
         comparar = (Integer.parseInt(txtRut.getText()));
         comparar2 = (pswContraseñaLoguin.getText());
 
@@ -253,8 +253,8 @@ public class Loguin extends javax.swing.JDialog {
         }
         if (a == 3) {
             
-            Datos.Comparar = (asd.getNombre() +"  "+ asd.getApellido());
-            Datos.Comparar2 = (asd.getRut());
+            DatosCliente.Comparar = (asd.getNombre() +"  "+ asd.getApellido());
+            DatosCliente.Comparar2 = (asd.getRut());
                         
             
             this.dispose();

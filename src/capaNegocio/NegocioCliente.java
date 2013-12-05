@@ -5,7 +5,7 @@
 package capaNegocio;
 
 import capaConexion.Conexion;
-import capaDatos.Datos;
+import capaDatos.DatosCliente;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -15,11 +15,11 @@ import java.util.logging.Logger;
  *
  * @author Johnny y karo
  */
-public class Negocio {
+public class NegocioCliente {
 
     private Conexion cnn;
 
-    public Negocio() {
+    public NegocioCliente() {
         this.cnn = new Conexion();
     }
 
@@ -35,7 +35,7 @@ public class Negocio {
         cnn.setPassword("");
     }
 
-    public void ingresarDatos(Datos asd) {
+    public void ingresarDatos(DatosCliente asd) {
         this.configurarConexion();
         cnn.setEsSelect(false);
 
@@ -59,8 +59,8 @@ public class Negocio {
         cnn.cerrarConexion();
     }
 
-    public Datos buscarDatos(int Rut) {
-        Datos asd = new Datos();
+    public DatosCliente buscarDatos(int Rut) {
+        DatosCliente asd = new DatosCliente();
         this.configurarConexion();
 
         cnn.setEsSelect(true);
@@ -84,22 +84,22 @@ public class Negocio {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(capaNegocio.Negocio.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(capaNegocio.NegocioCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         cnn.cerrarConexion();
         return asd;
     }
 
-    public ArrayList<Datos> getDatos() {
+    public ArrayList<DatosCliente> getDatos() {
         this.configurarConexion();
-        ArrayList<Datos> lista = new ArrayList();
+        ArrayList<DatosCliente> lista = new ArrayList();
         cnn.setEsSelect(true);
         cnn.setSentenciaSQL("select * from "
                 + cnn.getNombreTabla());
         cnn.conectar();
         try {
             while (cnn.getRst().next()) {
-                Datos asd = new Datos();
+                DatosCliente asd = new DatosCliente();
                 asd.setRut(cnn.getRst().getInt("Rut"));
                 asd.setNombre(cnn.getRst().getString("Nombre"));
                 asd.setApellido(cnn.getRst().getString("Apellido"));
@@ -115,7 +115,7 @@ public class Negocio {
                 lista.add(asd);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(capaNegocio.Negocio.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(capaNegocio.NegocioCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         cnn.cerrarConexion();
         return lista;
@@ -126,22 +126,22 @@ public class Negocio {
     ///////////////////Mostrar Comunas////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////
     
-    public ArrayList<Datos> getDatos2() {
+    public ArrayList<DatosCliente> getDatos2() {
         this.configurarConexion();
-        ArrayList<Datos> lista2 = new ArrayList();
+        ArrayList<DatosCliente> lista2 = new ArrayList();
         cnn.setEsSelect(true);
         cnn.setSentenciaSQL("select * from Comuna");
         cnn.conectar();
         try {
             while (cnn.getRst().next()) {
-                Datos asd = new Datos();                
+                DatosCliente asd = new DatosCliente();                
                 asd.setComuna((cnn.getRst().getInt("idComuna")+" .- "+
                              (cnn.getRst().getString("Nombre"))));
                 
                 lista2.add(asd);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(capaNegocio.Negocio.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(capaNegocio.NegocioCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
         cnn.cerrarConexion();
         return lista2;

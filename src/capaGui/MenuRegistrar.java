@@ -4,8 +4,8 @@
  */
 package capaGui;
 
-import capaDatos.Datos;
-import capaNegocio.Negocio;
+import capaDatos.DatosCliente;
+import capaNegocio.NegocioCliente;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -251,8 +251,8 @@ public class MenuRegistrar extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(lblFechaNacimiento)
                                 .addGap(25, 25, 25)
-                                .addComponent(txtFechaCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(217, 217, 217)
+                                .addComponent(txtFechaCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(193, 193, 193)
                                 .addComponent(lblCorreo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -620,8 +620,8 @@ public class MenuRegistrar extends javax.swing.JDialog {
             this.cbCondiciones.requestFocus();
             return;
         }
-        Negocio neg = new Negocio();
-        Datos aux = neg.buscarDatos(Integer.parseInt(this.txtRut.getText().trim()));
+        NegocioCliente neg = new NegocioCliente();
+        DatosCliente aux = neg.buscarDatos(Integer.parseInt(this.txtRut.getText().trim()));
 
         Comparar = Integer.parseInt(txtRut.getText());
         if (aux.getRut() == Comparar) {
@@ -641,7 +641,7 @@ public class MenuRegistrar extends javax.swing.JDialog {
             this.pswContraseña.requestFocus();
             return;
         }
-        Datos asd = new Datos();
+        DatosCliente asd = new DatosCliente();
         asd.setRut(Integer.parseInt(this.txtRut.getText().trim()));
         asd.setNombre(this.txtNombre.getText().trim());
         asd.setApellido(this.txtApellido.getText().trim());
@@ -884,10 +884,10 @@ public class MenuRegistrar extends javax.swing.JDialog {
         }
     }
      private void llenarComuna() {
-        Negocio neg2 = new Negocio();
-        ArrayList<Datos> lista2 = neg2.getDatos2();
+        NegocioCliente neg2 = new NegocioCliente();
+        ArrayList<DatosCliente> lista2 = neg2.getDatos2();
         for (int i = 0; i < lista2.size(); i++) {
-            Datos sv = lista2.get(i);
+            DatosCliente sv = lista2.get(i);
             
             this.cmbComuna.addItem(sv.getComuna());
         }

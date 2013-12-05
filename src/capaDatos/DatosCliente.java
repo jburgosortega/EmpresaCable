@@ -8,7 +8,7 @@ package capaDatos;
  *
  * @author Johnny y karo
  */
-public class Datos {
+public class DatosCliente {
 
     private String Nombre;
     private String Apellido;
@@ -28,7 +28,7 @@ public class Datos {
     public static String Comparar;
     public static int Comparar2;
 
-    public Datos(String Nombre, String Apellido, int Rut, String FechaNacimiento, String Sexo,
+    public DatosCliente(String Nombre, String Apellido, int Rut, String FechaNacimiento, String Sexo,
             String Correo, int NroTelefono, int NroCelular, String Direccion, int Numero,
             String Comuna, String Contraseña, String Comparar, int Comparar2) {
 
@@ -45,11 +45,11 @@ public class Datos {
         this.Numero = 0;
         this.Comuna = "";
         this.Contraseña = "";
-        Datos.Comparar = "";
-        Datos.Comparar2 = 0;
+        DatosCliente.Comparar = "";
+        DatosCliente.Comparar2 = 0;
     }
 
-    public Datos() {
+    public DatosCliente() {
         this.Nombre = Nombre;
         this.Apellido = Apellido;
         this.Rut = Rut;
@@ -62,8 +62,8 @@ public class Datos {
         this.Numero = Numero;
         this.Comuna = Comuna;
         this.Contraseña = Contraseña;
-        Datos.Comparar = Comparar;
-        Datos.Comparar2 = Comparar2;
+        DatosCliente.Comparar = Comparar;
+        DatosCliente.Comparar2 = Comparar2;
     }
 
     /**
@@ -245,7 +245,7 @@ public class Datos {
      * @param Comparar the Comparar to set
      */
     public void setComparar(String Comparar) {
-        Datos.Comparar = Comparar;
+        DatosCliente.Comparar = Comparar;
     }
 
     /**
@@ -259,6 +259,6 @@ public class Datos {
      * @param Comparar the Comparar to set
      */
     public void setComparar2(int Comparar2) {
-        Datos.Comparar2 = Comparar2;
+        DatosCliente.Comparar2 = Comparar2;
     }
 }
