@@ -27,7 +27,7 @@ public class NegocioProductos {
 
 
     }
-
+    
     private void configurarConexion() {
         cnn.setNombreBaseDatos("Metropolis");
 
@@ -121,6 +121,9 @@ public class NegocioProductos {
         cnn.cerrarConexion();
         return listaCanal;
     }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
     
     /**
      *
@@ -139,9 +142,9 @@ public class NegocioProductos {
         try {
             if (cnn.getRst().next()) {
                 asd.setIdDecodificador(cnn.getRst().getInt("idDecodificador"));
-                asd.setNombrePackCanales(cnn.getRst().getString("Nombre"));
-                asd.setTipoPackCanales(cnn.getRst().getString("Tipo"));
-                asd.setPrecioPackCanales(cnn.getRst().getInt("Precio"));                
+                asd.setNombreDecodificador(cnn.getRst().getString("Nombre"));
+                asd.setTipoDecodificador(cnn.getRst().getString("Tipo"));
+                asd.setPrecioDecodificador(cnn.getRst().getInt("Precio"));                
 
             }
         } catch (SQLException ex) {
@@ -150,6 +153,27 @@ public class NegocioProductos {
         cnn.cerrarConexion();
         return asd;
     }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    public ArrayList<DatosProductos> getDatosDecodificadores() {
+        this.configurarConexion();
+        ArrayList<DatosProductos> listaDecodificador = new ArrayList();
+        cnn.setEsSelect(true);
+        cnn.setSentenciaSQL("select * from Decodificador");
+        cnn.conectar();
+        try {
+            while (cnn.getRst().next()) {
+                DatosProductos asd = new DatosProductos();  
+              
+              asd.setNombreDecodificador(cnn.getRst().getString("nombre"));               
+                
+                listaDecodificador.add(asd);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(capaNegocio.NegocioProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cnn.cerrarConexion();
+        return listaDecodificador;
    
-   
+    }
 }

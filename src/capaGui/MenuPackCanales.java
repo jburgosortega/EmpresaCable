@@ -4,9 +4,13 @@
  */
 package capaGui;
 
+import capaDatos.DatosCliente;
 import capaDatos.DatosProductos;
+import capaDatos.DatosServicios;
 import capaNegocio.NegocioProductos;
+import capaNegocio.NegocioServicios;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -274,7 +278,43 @@ public class MenuPackCanales extends javax.swing.JDialog {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        
+        int a = (int) Math.round((Math.random() * 10000));
+
+
+
+        NegocioServicios neg = new NegocioServicios();
+        if (this.cmbPackElegir.getSelectedIndex() == DatosServicios.getComparar2()) {
+
+            JOptionPane.showMessageDialog(this, "Ud. Ya tiene este Pack en sus Servicios",
+                    "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
+            this.btnMostrat.requestFocus();
+            return;
+        }
+
+        Calendar cal1 = Calendar.getInstance();        
+
+        DatosServicios asd = new DatosServicios();
+        DatosProductos dsa = new DatosProductos();
+
+        if (a != DatosServicios.getComparar2()) {
+            dsa.setIdPackCanales(this.cmbPackElegir.getSelectedIndex());
+            asd.setIdContratado((a));
+            asd.setRutCliente(DatosCliente.Comparar2);
+            asd.setFechaContratacion((+cal1.get(Calendar.YEAR) + "-" + (cal1.get(Calendar.MONTH)+1) + "-" + cal1.get(Calendar.DATE)));
+            
+
+            neg.ingresarDatos(asd);
+            neg.ingresarContratoCanales(asd , dsa);
+        } else {
+            JOptionPane.showMessageDialog(this, "Ud. Esta seguro de Contratar este Pack?",
+                    "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
+            this.btnAgregar.requestFocus();
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this, "Ingreso Exito",
+                "Bienvenido!", JOptionPane.INFORMATION_MESSAGE);       
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -282,8 +322,11 @@ public class MenuPackCanales extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnMostratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostratActionPerformed
-       this.cmbCanales.removeAllItems();
-        
+
+        MostraridContratados();
+        System.out.println(DatosServicios.getComparar2());
+        this.cmbCanales.removeAllItems();
+
         if (this.cmbPackElegir.getSelectedIndex() != 0) {
             NegocioProductos neg = new NegocioProductos();
 
@@ -382,6 +425,16 @@ public class MenuPackCanales extends javax.swing.JDialog {
             if (this.cmbPackElegir.getSelectedIndex() == sv.getIdCanal()) {
                 this.cmbCanales.addItem(sv.getNombreCanal());
             }
+        }
+    }
+
+    private void MostraridContratados() {
+        NegocioServicios neg = new NegocioServicios();
+        ArrayList<DatosServicios> listaidDatosServicioses = neg.getDatosServicios();
+        for (int i = 0; i < listaidDatosServicioses.size(); i++) {
+            DatosServicios sv = listaidDatosServicioses.get(i);
+
+            DatosServicios.setComparar2(sv.getIdContratado());
         }
     }
 }

@@ -4,6 +4,17 @@
  */
 package capaGui;
 
+import capaDatos.DatosCliente;
+import capaDatos.DatosProductos;
+import capaDatos.DatosServicios;
+import capaNegocio.NegocioProductos;
+import capaNegocio.NegocioServicios;
+import java.util.ArrayList;
+import java.util.Calendar;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Johnny y karo
@@ -17,6 +28,9 @@ public class MenuDecodificadores extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        llenarNombre();
+        MostraridContratados();
+        lblImagen.setIcon(new ImageIcon(getClass().getResource("Seleccione.jpg")));
     }
 
     /**
@@ -29,43 +43,28 @@ public class MenuDecodificadores extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        lblPropaganda2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         cmbDecodificador = new javax.swing.JComboBox();
+        btnMostrar = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        lblNombre = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        lblTipo = new javax.swing.JLabel();
+        txtTipo = new javax.swing.JTextField();
+        lblPrecio = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
+        lblSigno = new javax.swing.JLabel();
+        lblImagen = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblPropaganda2.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        lblPropaganda2.setForeground(new java.awt.Color(0, 153, 0));
-        lblPropaganda2.setText("Propaganda");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(176, 176, 176)
-                .addComponent(lblPropaganda2)
-                .addContainerGap(182, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(lblPropaganda2)
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -108,7 +107,7 @@ public class MenuDecodificadores extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(lblTitulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,9 +120,86 @@ public class MenuDecodificadores extends javax.swing.JDialog {
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         cmbDecodificador.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        cmbDecodificador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione...", "Decodificador sd", "Decodificador HD", "Decodificador Full HD" }));
+        cmbDecodificador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione" }));
 
-        btnAgregar.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnMostrar.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnMostrar.setText("Mostrar");
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
+
+        lblNombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblNombre.setText("Nombre");
+
+        txtNombre.setEditable(false);
+        txtNombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        lblTipo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTipo.setText("Tipo");
+
+        txtTipo.setEditable(false);
+        txtTipo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        lblPrecio.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblPrecio.setText("Precio");
+
+        txtPrecio.setEditable(false);
+        txtPrecio.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        lblSigno.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblSigno.setText("$");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombre)
+                    .addComponent(lblTipo)
+                    .addComponent(lblPrecio))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                            .addComponent(lblSigno)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtPrecio))
+                        .addComponent(txtTipo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblNombre)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTipo)
+                            .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPrecio)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSigno))))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(0, 0, 255));
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,12 +211,19 @@ public class MenuDecodificadores extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cmbDecodificador, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAgregar)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(cmbDecodificador, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMostrar)))
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(222, 222, 222)
+                .addComponent(btnAgregar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,38 +231,37 @@ public class MenuDecodificadores extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbDecodificador, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnMostrar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnAgregar)
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(204, 204, 204)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(192, 192, 192))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -190,7 +272,7 @@ public class MenuDecodificadores extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -200,8 +282,66 @@ public class MenuDecodificadores extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+        if (this.cmbDecodificador.getSelectedItem().equals("EMOF HD")) {
+            lblImagen.setIcon(new ImageIcon(getClass().getResource("EMOF HD.jpg")));
+        } else if (this.cmbDecodificador.getSelectedItem().equals("EMOF")) {
+            lblImagen.setIcon(new ImageIcon(getClass().getResource("EMOF.jpg")));
+        } else if (this.cmbDecodificador.getSelectedItem().equals("ACNEP")) {
+            lblImagen.setIcon(new ImageIcon(getClass().getResource("ACNEP.jpg")));
+        } else if (this.cmbDecodificador.getSelectedItem().equals("ACNEP HD")) {
+            lblImagen.setIcon(new ImageIcon(getClass().getResource("ACNEP HD.jpg")));
+        }
+        
+
+        if (this.cmbDecodificador.getSelectedIndex() != 0) {
+            NegocioProductos neg = new NegocioProductos();
+
+            DatosProductos acad = neg.buscarDatosDecodificador((this.cmbDecodificador.getSelectedIndex()));
+
+            this.txtNombre.setText(acad.getNombreDecodificador());
+            this.txtTipo.setText(acad.getTipoDecodificador());
+            this.txtPrecio.setText("" + acad.getPrecioDecodificador());
+
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione Decodificador",
+                    "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
+            this.cmbDecodificador.requestFocus();
+        }
+    }//GEN-LAST:event_btnMostrarActionPerformed
+
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+       
+        int a = (int) Math.round((Math.random() * 10000));
+
+
+
+        NegocioServicios neg = new NegocioServicios();
+        
+        Calendar cal1 = Calendar.getInstance();        
+
+        DatosServicios asd = new DatosServicios();
+        DatosProductos dsa = new DatosProductos();
+
+        if (a != DatosServicios.getComparar2()) {
+            dsa.setIdDecodificador(this.cmbDecodificador.getSelectedIndex());
+            asd.setIdContratado((a));
+            asd.setRutCliente(DatosCliente.Comparar2);
+            asd.setFechaContratacion((+cal1.get(Calendar.YEAR) + "-" + (cal1.get(Calendar.MONTH)+1) + "-" + cal1.get(Calendar.DATE)));
+            
+
+            neg.ingresarDatos(asd);
+            neg.ingresarContratoDecodificador(asd , dsa);
+        } else {
+            JOptionPane.showMessageDialog(this, "Ud. Esta seguro de Contratar este Pack?",
+                    "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
+            this.btnAgregar.requestFocus();
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this, "Ingreso Exito",
+                "Bienvenido!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
@@ -247,14 +387,41 @@ public class MenuDecodificadores extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox cmbDecodificador;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JLabel lblPropaganda2;
+    private javax.swing.JLabel lblImagen;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblPrecio;
+    private javax.swing.JLabel lblSigno;
+    private javax.swing.JLabel lblTipo;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtTipo;
     // End of variables declaration//GEN-END:variables
+    private void llenarNombre() {
+        NegocioProductos neg2 = new NegocioProductos();
+        ArrayList<DatosProductos> lista = neg2.getDatosDecodificadores();
+        for (int i = 0; i < lista.size(); i++) {
+            DatosProductos sv = lista.get(i);
+
+            this.cmbDecodificador.addItem(sv.getNombreDecodificador());
+        }
+    }
+    
+    private void MostraridContratados() {
+        NegocioServicios neg = new NegocioServicios();
+        ArrayList<DatosServicios> listaidDatosServicioses = neg.getDatosServicios();
+        for (int i = 0; i < listaidDatosServicioses.size(); i++) {
+            DatosServicios sv = listaidDatosServicioses.get(i);
+
+            DatosServicios.setComparar2(sv.getIdContratado());
+        }
+    }
 }

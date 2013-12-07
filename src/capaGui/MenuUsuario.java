@@ -299,12 +299,12 @@ public class MenuUsuario extends javax.swing.JDialog {
 
     private void btnDecodificadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecodificadoresActionPerformed
         MenuDecodificadores dialog = new MenuDecodificadores(new javax.swing.JFrame(), true);
-        DatosProductos.setComparar("packdecodificadores"); 
+        DatosProductos.setComparar("decodificador"); 
         dialog.setVisible(true);
     }//GEN-LAST:event_btnDecodificadoresActionPerformed
 
     private void btnServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServiciosActionPerformed
-        MenuServicios dialog = new MenuServicios(new javax.swing.JFrame(), true);
+        MenuProductosCliente dialog = new MenuProductosCliente(new javax.swing.JFrame(), true);
         dialog.setVisible(true);
     }//GEN-LAST:event_btnServiciosActionPerformed
 

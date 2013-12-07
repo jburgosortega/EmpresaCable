@@ -5,6 +5,7 @@
 package capaNegocio;
 
 import capaConexion.Conexion;
+import capaDatos.DatosCliente;
 import capaDatos.DatosProductos;
 import capaDatos.DatosServicios;
 import java.sql.SQLException;
@@ -45,8 +46,7 @@ public class NegocioServicios {
                 + " values("
                 + asd.getIdContratado() + ","
                 + asd.getRutCliente() + ",'"
-                + asd.getFechaContratacion() + "','"                
-                + asd.getDireccion()     + "')");
+                + asd.getFechaContratacion() + "')");
 
 
         cnn.conectar();
@@ -73,7 +73,7 @@ public class NegocioServicios {
         this.configurarConexion();
         cnn.setEsSelect(false);
 
-        cnn.setSentenciaSQL("insert into ListaPackDecodificadores values("
+        cnn.setSentenciaSQL("insert into Listadecodificadores values("
                 + dsa.getIdDecodificador() + ","                         
                 + asd.getIdContratado()     + ")");
 
@@ -96,7 +96,7 @@ public class NegocioServicios {
                 asd.setRutCliente(cnn.getRst().getInt("Cliente_Rut"));
                 asd.setIdContratado(cnn.getRst().getInt("idContratado"));
                 asd.setFechaContratacion(cnn.getRst().getString("Fecha"));                
-                asd.setDireccion(cnn.getRst().getString("Direccion"));
+                
                 
 
             }
@@ -106,10 +106,63 @@ public class NegocioServicios {
         cnn.cerrarConexion();
         return asd;
     }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////Buscar idContratado segun RutCLiente///////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
     
+    public ArrayList<DatosServicios> getidContratados() {
+        this.configurarConexion();
+        ArrayList<DatosServicios> listaidContratados = new ArrayList();
+        cnn.setEsSelect(true);
+        cnn.setSentenciaSQL("select idContratado from Contratado"
+                  + "where Cliente_Rut = "+ DatosCliente.Comparar2);
+        cnn.conectar();
+        try {
+            while (cnn.getRst().next()) {
+                DatosServicios qwe = new DatosServicios();
+              qwe.setIdContratado(cnn.getRst().getInt("idContratado"));
+                
+                
+                listaidContratados.add(qwe);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(capaNegocio.NegocioCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cnn.cerrarConexion();
+        return listaidContratados;
+    }
+   ////////////////////////////////////////////////////////////////////////////////////////////////////
+   /////////////////////////////////Buscar Lista PackCanales///////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    public DatosServicios buscarListaPackCanales() {
+        DatosServicios asd = new DatosServicios();
+        this.configurarConexion();
+
+        cnn.setEsSelect(true);
+        cnn.setSentenciaSQL("select * from "
+                + "Contratado"
+                + " where ListaPackCanales="); //Imcompleto);
+        cnn.conectar();
+        try {
+            if (cnn.getRst().next()) {
+                asd.setIdListaPackCanales(cnn.getRst().getInt("PackCanales_idPackCanales"));
+                asd.setIdContratado(cnn.getRst().getInt("Contratado_idContratado"));               
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(capaNegocio.NegocioServicios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cnn.cerrarConexion();
+        return asd;
+    }
+   
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////Obtener Datos Cotratados en Lista/////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
     
 
-    public ArrayList<DatosServicios> getDatosServicioses() {
+    public ArrayList<DatosServicios> getDatosServicios() {
         this.configurarConexion();
         ArrayList<DatosServicios> listaServicios = new ArrayList();
         cnn.setEsSelect(true);
@@ -122,7 +175,7 @@ public class NegocioServicios {
                 asd.setRutCliente(cnn.getRst().getInt("Cliente_Rut"));
                 asd.setIdContratado(cnn.getRst().getInt("idContratado"));
                 asd.setFechaContratacion(cnn.getRst().getString("Fecha"));                
-                asd.setDireccion(cnn.getRst().getString("Direccion"));
+                
 
                 listaServicios.add(asd);
             }
@@ -131,8 +184,11 @@ public class NegocioServicios {
         }
         cnn.cerrarConexion();
         return listaServicios;
-
-    }
+    }    
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
     
    
 }

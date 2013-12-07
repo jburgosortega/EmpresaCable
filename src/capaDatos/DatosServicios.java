@@ -11,34 +11,39 @@ package capaDatos;
 public class DatosServicios {
 
   
-    
+    private int idListaPackCanales;
+    private int idListaDecodificadores;
     private int idContratado;
     private int RutCliente;    
     private String FechaContratacion;
-    private String Direccion;  
+     
     /**
      *
      */
     private static String Comparar;
     private static int Comparar2;
 
-    public DatosServicios(int idContratado, int RutCliente,
-            String FechaContratacion, String Direccion) {
+    public DatosServicios(int idListaPackCanales,
+        int idListaDecodificadores,int idContratado, int RutCliente,
+            String FechaContratacion) {
 
 
+        this.idListaPackCanales = 0;
+        this.idListaDecodificadores = 0;
         this.idContratado = 0;
         this.RutCliente = 0;    
         this.FechaContratacion = "";
-        this.Direccion = "";
-        
+      
     }
 
     public DatosServicios() {
         
+        this.idListaPackCanales = idListaPackCanales;
+        this.idListaDecodificadores = idListaDecodificadores;
         this.idContratado = idContratado;
         this.RutCliente = RutCliente;    
         this.FechaContratacion = FechaContratacion;
-        this.Direccion = Direccion;
+       
         
     }
 
@@ -82,21 +87,7 @@ public class DatosServicios {
      */
     public void setFechaContratacion(String FechaContratacion) {
         this.FechaContratacion = FechaContratacion;
-    }
-
-    /**
-     * @return the Direccion
-     */
-    public String getDireccion() {
-        return Direccion;
-    }
-
-    /**
-     * @param Direccion the Direccion to set
-     */
-    public void setDireccion(String Direccion) {
-        this.Direccion = Direccion;
-    }
+    }   
     
       /**
      * @return the Comparar
@@ -124,6 +115,34 @@ public class DatosServicios {
      */
     public static void setComparar2(int aComparar2) {
         Comparar2 = aComparar2;
+    }
+
+    /**
+     * @return the idListaPackCanales
+     */
+    public int getIdListaPackCanales() {
+        return idListaPackCanales;
+    }
+
+    /**
+     * @param idListaPackCanales the idListaPackCanales to set
+     */
+    public void setIdListaPackCanales(int idListaPackCanales) {
+        this.idListaPackCanales = idListaPackCanales;
+    }
+
+    /**
+     * @return the idListaDecodificadores
+     */
+    public int getIdListaDecodificadores() {
+        return idListaDecodificadores;
+    }
+
+    /**
+     * @param idListaDecodificadores the idListaDecodificadores to set
+     */
+    public void setIdListaDecodificadores(int idListaDecodificadores) {
+        this.idListaDecodificadores = idListaDecodificadores;
     }
     
 }
